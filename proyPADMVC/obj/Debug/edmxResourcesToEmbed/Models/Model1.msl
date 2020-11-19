@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1Model1StoreContainer" CdmEntityContainer="Database1Entities1">
+    <EntitySetMapping Name="Alumno">
+      <EntityTypeMapping TypeName="Database1Model1.Alumno">
+        <MappingFragment StoreEntitySet="Alumno">
+          <ScalarProperty Name="legajo" ColumnName="legajo" />
+          <ScalarProperty Name="dniAlumno" ColumnName="dniAlumno" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="tutor_dni" ColumnName="tutor_dni" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Concepto">
+      <EntityTypeMapping TypeName="Database1Model1.Concepto">
+        <MappingFragment StoreEntitySet="Concepto">
+          <ScalarProperty Name="idConcepto" ColumnName="idConcepto" />
+          <ScalarProperty Name="concepto1" ColumnName="concepto" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="alumno_legajo" ColumnName="alumno_legajo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Curso">
+      <EntityTypeMapping TypeName="Database1Model1.Curso">
+        <MappingFragment StoreEntitySet="Curso">
+          <ScalarProperty Name="identificador" ColumnName="identificador" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="division" ColumnName="division" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="nivel_idNivel" ColumnName="nivel_idNivel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inscripcion">
+      <EntityTypeMapping TypeName="Database1Model1.Inscripcion">
+        <MappingFragment StoreEntitySet="Inscripcion">
+          <ScalarProperty Name="idInscripcion" ColumnName="idInscripcion" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="alumno_legajo" ColumnName="alumno_legajo" />
+          <ScalarProperty Name="curso_identificador" ColumnName="curso_identificador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel">
+      <EntityTypeMapping TypeName="Database1Model1.Nivel">
+        <MappingFragment StoreEntitySet="Nivel">
+          <ScalarProperty Name="idNivel" ColumnName="idNivel" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pago">
+      <EntityTypeMapping TypeName="Database1Model1.Pago">
+        <MappingFragment StoreEntitySet="Pago">
+          <ScalarProperty Name="idPago" ColumnName="idPago" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="concepto_idConcepto" ColumnName="concepto_idConcepto" />
+          <ScalarProperty Name="alumno_legajo" ColumnName="alumno_legajo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tutor">
+      <EntityTypeMapping TypeName="Database1Model1.Tutor">
+        <MappingFragment StoreEntitySet="Tutor">
+          <ScalarProperty Name="dniTutor" ColumnName="dniTutor" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

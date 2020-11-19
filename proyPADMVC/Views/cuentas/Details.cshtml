@@ -1,0 +1,66 @@
+﻿@model proyPADMVC.cuenta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>cuenta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.anio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.anio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.saldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.saldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alumno.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alumno.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.concepto.concepto1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.concepto.concepto1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCuenta }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

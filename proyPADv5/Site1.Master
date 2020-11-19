@@ -1,0 +1,106 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="proyectoPADv4.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style3 {
+            height: 533px;
+        }
+        .auto-style4 {
+            height: 80px;
+        }
+        .auto-style5 {
+            height: 71px;
+        }
+        .auto-style6 {
+            height: 80px;
+            width: 287px;
+        }
+        .auto-style7 {
+            height: 533px;
+            width: 287px;
+        }
+        .auto-style8 {
+            height: 71px;
+            width: 287px;
+        }
+        .auto-style9 {
+            height: 80px;
+            width: 551px;
+        }
+        .auto-style10 {
+            height: 71px;
+            width: 551px;
+        }
+        .auto-style11 {
+            margin-left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <table class="auto-style1">
+                <tr>
+                    <td class="auto-style6">
+                        <asp:Panel ID="Panel3" runat="server" BackColor="#FF9933" Height="86px">
+                        </asp:Panel>
+                    </td>
+                    <td class="auto-style9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Panel ID="Panel4" runat="server" BackColor="#FF9933" Height="99px">
+                            <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="Button1" runat="server" Text="Home" Width="200px" />
+                        </asp:Panel>
+                    </td>
+                    <td class="auto-style4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Panel ID="Panel5" runat="server" BackColor="#FF9933" Height="99px">
+                            <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnInscripcion" runat="server" Text="Pre-Inscripcion" Width="185px" OnClick="btnInscripcion_Click" />
+                        </asp:Panel>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style7">
+                        <asp:Panel ID="Panel2" runat="server" BackImageUrl="~/images/20407834.jpg" Height="536px">
+                        </asp:Panel>
+                    </td>
+                    <td class="auto-style3" colspan="2">
+                        <asp:Panel ID="Panel1" runat="server" CssClass="auto-style11" Height="463px">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </asp:Panel>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style8">
+                        <asp:Panel ID="Panel7" runat="server" BackColor="#999999" Height="69px">
+                        </asp:Panel>
+                    </td>
+                    <td class="auto-style10">
+                        <asp:Panel ID="Panel6" runat="server" BackColor="#999999" Height="69px">
+                        </asp:Panel>
+                    </td>
+                    <td class="auto-style5">
+                        <asp:Panel ID="Panel8" runat="server" BackColor="#999999" Height="68px">
+                        </asp:Panel>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <br />
+            <br />
+        </div>
+    </form>
+</body>
+</html>

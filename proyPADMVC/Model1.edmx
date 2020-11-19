@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="legajo" />
+          </Key>
+          <Property Name="legajo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dniAlumno" Type="int" />
+          <Property Name="Apellido" Type="varchar" MaxLength="30" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" />
+          <Property Name="fecha_nacimiento" Type="date" />
+          <Property Name="tutor_dni" Type="int" />
+        </EntityType>
+        <EntityType Name="concepto">
+          <Key>
+            <PropertyRef Name="idConcepto" />
+          </Key>
+          <Property Name="idConcepto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="concepto" Type="varchar" MaxLength="30" />
+          <Property Name="importe" Type="int" />
+        </EntityType>
+        <EntityType Name="cuenta">
+          <Key>
+            <PropertyRef Name="idCuenta" />
+          </Key>
+          <Property Name="idCuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="anio" Type="int" />
+          <Property Name="supago" Type="int" />
+          <Property Name="saldo" Type="int" />
+          <Property Name="estado" Type="varchar" MaxLength="30" />
+          <Property Name="concepto_idConcepto" Type="int" />
+          <Property Name="alumno_legajo" Type="int" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="identificador" />
+          </Key>
+          <Property Name="identificador" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="anio" Type="int" />
+          <Property Name="division" Type="varchar" MaxLength="1" />
+          <Property Name="descripcion" Type="varchar" MaxLength="30" />
+          <Property Name="nivel_idNivel" Type="int" />
+        </EntityType>
+        <EntityType Name="Inscripcion">
+          <Key>
+            <PropertyRef Name="idInscripcion" />
+          </Key>
+          <Property Name="idInscripcion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="anio" Type="int" />
+          <Property Name="alumno_legajo" Type="int" />
+          <Property Name="curso_identificador" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Nivel">
+          <Key>
+            <PropertyRef Name="idNivel" />
+          </Key>
+          <Property Name="idNivel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="idPago" />
+          </Key>
+          <Property Name="idPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supago" Type="int" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="cuenta_idCuenta" Type="int" />
+          <Property Name="alumno_legajo" Type="int" />
+        </EntityType>
+        <EntityType Name="Tutor">
+          <Key>
+            <PropertyRef Name="dniTutor" />
+          </Key>
+          <Property Name="dniTutor" Type="int" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="30" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Alumno__tutor_dn__45F365D3">
+          <End Role="Tutor" Type="Self.Tutor" Multiplicity="0..1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="dniTutor" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="tutor_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cuenta__alumno_l__4F7CD00D">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="legajo" />
+            </Principal>
+            <Dependent Role="cuenta">
+              <PropertyRef Name="alumno_legajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cuenta__concepto__4E88ABD4">
+          <End Role="concepto" Type="Self.concepto" Multiplicity="0..1" />
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="concepto">
+              <PropertyRef Name="idConcepto" />
+            </Principal>
+            <Dependent Role="cuenta">
+              <PropertyRef Name="concepto_idConcepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Curso__nivel_idN__4316F928">
+          <End Role="Nivel" Type="Self.Nivel" Multiplicity="0..1" />
+          <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nivel">
+              <PropertyRef Name="idNivel" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="nivel_idNivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__alumn__48CFD27E">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="Inscripcion" Type="Self.Inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="legajo" />
+            </Principal>
+            <Dependent Role="Inscripcion">
+              <PropertyRef Name="alumno_legajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__curso__49C3F6B7">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="0..1" />
+          <End Role="Inscripcion" Type="Self.Inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="identificador" />
+            </Principal>
+            <Dependent Role="Inscripcion">
+              <PropertyRef Name="curso_identificador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pago__alumno_leg__534D60F1">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="legajo" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="alumno_legajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pago__cuenta_idC__52593CB8">
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta">
+              <PropertyRef Name="idCuenta" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="cuenta_idCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database2ModelStoreContainer">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="concepto" EntityType="Self.concepto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cuenta" EntityType="Self.cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inscripcion" EntityType="Self.Inscripcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nivel" EntityType="Self.Nivel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tutor" EntityType="Self.Tutor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Alumno__tutor_dn__45F365D3" Association="Self.FK__Alumno__tutor_dn__45F365D3">
+            <End Role="Tutor" EntitySet="Tutor" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cuenta__alumno_l__4F7CD00D" Association="Self.FK__cuenta__alumno_l__4F7CD00D">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="cuenta" EntitySet="cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cuenta__concepto__4E88ABD4" Association="Self.FK__cuenta__concepto__4E88ABD4">
+            <End Role="concepto" EntitySet="concepto" />
+            <End Role="cuenta" EntitySet="cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Curso__nivel_idN__4316F928" Association="Self.FK__Curso__nivel_idN__4316F928">
+            <End Role="Nivel" EntitySet="Nivel" />
+            <End Role="Curso" EntitySet="Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__alumn__48CFD27E" Association="Self.FK__Inscripci__alumn__48CFD27E">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Inscripcion" EntitySet="Inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__curso__49C3F6B7" Association="Self.FK__Inscripci__curso__49C3F6B7">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Inscripcion" EntitySet="Inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pago__alumno_leg__534D60F1" Association="Self.FK__Pago__alumno_leg__534D60F1">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pago__cuenta_idC__52593CB8" Association="Self.FK__Pago__cuenta_idC__52593CB8">
+            <End Role="cuenta" EntitySet="cuenta" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="legajo" />
+          </Key>
+          <Property Name="legajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dniAlumno" Type="Int32" />
+          <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="tutor_dni" Type="Int32" />
+          <NavigationProperty Name="Tutor" Relationship="Self.FK__Alumno__tutor_dn__45F365D3" FromRole="Alumno" ToRole="Tutor" />
+          <NavigationProperty Name="cuenta" Relationship="Self.FK__cuenta__alumno_l__4F7CD00D" FromRole="Alumno" ToRole="cuenta" />
+          <NavigationProperty Name="Inscripcion" Relationship="Self.FK__Inscripci__alumn__48CFD27E" FromRole="Alumno" ToRole="Inscripcion" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK__Pago__alumno_leg__534D60F1" FromRole="Alumno" ToRole="Pago" />
+        </EntityType>
+        <EntityType Name="concepto">
+          <Key>
+            <PropertyRef Name="idConcepto" />
+          </Key>
+          <Property Name="idConcepto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="concepto1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="importe" Type="Int32" />
+          <NavigationProperty Name="cuenta" Relationship="Self.FK__cuenta__concepto__4E88ABD4" FromRole="concepto" ToRole="cuenta" />
+        </EntityType>
+        <EntityType Name="cuenta">
+          <Key>
+            <PropertyRef Name="idCuenta" />
+          </Key>
+          <Property Name="idCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="anio" Type="Int32" />
+          <Property Name="supago" Type="Int32" />
+          <Property Name="saldo" Type="Int32" />
+          <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="concepto_idConcepto" Type="Int32" />
+          <Property Name="alumno_legajo" Type="Int32" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK__cuenta__alumno_l__4F7CD00D" FromRole="cuenta" ToRole="Alumno" />
+          <NavigationProperty Name="concepto" Relationship="Self.FK__cuenta__concepto__4E88ABD4" FromRole="cuenta" ToRole="concepto" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK__Pago__cuenta_idC__52593CB8" FromRole="cuenta" ToRole="Pago" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="identificador" />
+          </Key>
+          <Property Name="identificador" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="anio" Type="Int32" />
+          <Property Name="division" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nivel_idNivel" Type="Int32" />
+          <NavigationProperty Name="Nivel" Relationship="Self.FK__Curso__nivel_idN__4316F928" FromRole="Curso" ToRole="Nivel" />
+          <NavigationProperty Name="Inscripcion" Relationship="Self.FK__Inscripci__curso__49C3F6B7" FromRole="Curso" ToRole="Inscripcion" />
+        </EntityType>
+        <EntityType Name="Inscripcion">
+          <Key>
+            <PropertyRef Name="idInscripcion" />
+          </Key>
+          <Property Name="idInscripcion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="anio" Type="Int32" />
+          <Property Name="alumno_legajo" Type="Int32" />
+          <Property Name="curso_identificador" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK__Inscripci__alumn__48CFD27E" FromRole="Inscripcion" ToRole="Alumno" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK__Inscripci__curso__49C3F6B7" FromRole="Inscripcion" ToRole="Curso" />
+        </EntityType>
+        <EntityType Name="Nivel">
+          <Key>
+            <PropertyRef Name="idNivel" />
+          </Key>
+          <Property Name="idNivel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK__Curso__nivel_idN__4316F928" FromRole="Nivel" ToRole="Curso" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="idPago" />
+          </Key>
+          <Property Name="idPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supago" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="cuenta_idCuenta" Type="Int32" />
+          <Property Name="alumno_legajo" Type="Int32" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK__Pago__alumno_leg__534D60F1" FromRole="Pago" ToRole="Alumno" />
+          <NavigationProperty Name="cuenta" Relationship="Self.FK__Pago__cuenta_idC__52593CB8" FromRole="Pago" ToRole="cuenta" />
+        </EntityType>
+        <EntityType Name="Tutor">
+          <Key>
+            <PropertyRef Name="dniTutor" />
+          </Key>
+          <Property Name="dniTutor" Type="Int32" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK__Alumno__tutor_dn__45F365D3" FromRole="Tutor" ToRole="Alumno" />
+        </EntityType>
+        <Association Name="FK__Alumno__tutor_dn__45F365D3">
+          <End Role="Tutor" Type="Self.Tutor" Multiplicity="0..1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="dniTutor" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="tutor_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cuenta__alumno_l__4F7CD00D">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="legajo" />
+            </Principal>
+            <Dependent Role="cuenta">
+              <PropertyRef Name="alumno_legajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__alumn__48CFD27E">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="Inscripcion" Type="Self.Inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="legajo" />
+            </Principal>
+            <Dependent Role="Inscripcion">
+              <PropertyRef Name="alumno_legajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pago__alumno_leg__534D60F1">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="legajo" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="alumno_legajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cuenta__concepto__4E88ABD4">
+          <End Role="concepto" Type="Self.concepto" Multiplicity="0..1" />
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="concepto">
+              <PropertyRef Name="idConcepto" />
+            </Principal>
+            <Dependent Role="cuenta">
+              <PropertyRef Name="concepto_idConcepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pago__cuenta_idC__52593CB8">
+          <End Role="cuenta" Type="Self.cuenta" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cuenta">
+              <PropertyRef Name="idCuenta" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="cuenta_idCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Curso__nivel_idN__4316F928">
+          <End Role="Nivel" Type="Self.Nivel" Multiplicity="0..1" />
+          <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nivel">
+              <PropertyRef Name="idNivel" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="nivel_idNivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripci__curso__49C3F6B7">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="0..1" />
+          <End Role="Inscripcion" Type="Self.Inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="identificador" />
+            </Principal>
+            <Dependent Role="Inscripcion">
+              <PropertyRef Name="curso_identificador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" />
+          <EntitySet Name="concepto" EntityType="Self.concepto" />
+          <EntitySet Name="cuenta" EntityType="Self.cuenta" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" />
+          <EntitySet Name="Inscripcion" EntityType="Self.Inscripcion" />
+          <EntitySet Name="Nivel" EntityType="Self.Nivel" />
+          <EntitySet Name="Pago" EntityType="Self.Pago" />
+          <EntitySet Name="Tutor" EntityType="Self.Tutor" />
+          <AssociationSet Name="FK__Alumno__tutor_dn__45F365D3" Association="Self.FK__Alumno__tutor_dn__45F365D3">
+            <End Role="Tutor" EntitySet="Tutor" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cuenta__alumno_l__4F7CD00D" Association="Self.FK__cuenta__alumno_l__4F7CD00D">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="cuenta" EntitySet="cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__alumn__48CFD27E" Association="Self.FK__Inscripci__alumn__48CFD27E">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Inscripcion" EntitySet="Inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pago__alumno_leg__534D60F1" Association="Self.FK__Pago__alumno_leg__534D60F1">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cuenta__concepto__4E88ABD4" Association="Self.FK__cuenta__concepto__4E88ABD4">
+            <End Role="concepto" EntitySet="concepto" />
+            <End Role="cuenta" EntitySet="cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pago__cuenta_idC__52593CB8" Association="Self.FK__Pago__cuenta_idC__52593CB8">
+            <End Role="cuenta" EntitySet="cuenta" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Curso__nivel_idN__4316F928" Association="Self.FK__Curso__nivel_idN__4316F928">
+            <End Role="Nivel" EntitySet="Nivel" />
+            <End Role="Curso" EntitySet="Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripci__curso__49C3F6B7" Association="Self.FK__Inscripci__curso__49C3F6B7">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Inscripcion" EntitySet="Inscripcion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database2ModelStoreContainer" CdmEntityContainer="Database2Entities">
+          <EntitySetMapping Name="Alumno">
+            <EntityTypeMapping TypeName="Database2Model.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="legajo" ColumnName="legajo" />
+                <ScalarProperty Name="dniAlumno" ColumnName="dniAlumno" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="tutor_dni" ColumnName="tutor_dni" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="concepto">
+            <EntityTypeMapping TypeName="Database2Model.concepto">
+              <MappingFragment StoreEntitySet="concepto">
+                <ScalarProperty Name="idConcepto" ColumnName="idConcepto" />
+                <ScalarProperty Name="concepto1" ColumnName="concepto" />
+                <ScalarProperty Name="importe" ColumnName="importe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cuenta">
+            <EntityTypeMapping TypeName="Database2Model.cuenta">
+              <MappingFragment StoreEntitySet="cuenta">
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="supago" ColumnName="supago" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="concepto_idConcepto" ColumnName="concepto_idConcepto" />
+                <ScalarProperty Name="alumno_legajo" ColumnName="alumno_legajo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curso">
+            <EntityTypeMapping TypeName="Database2Model.Curso">
+              <MappingFragment StoreEntitySet="Curso">
+                <ScalarProperty Name="identificador" ColumnName="identificador" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="division" ColumnName="division" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nivel_idNivel" ColumnName="nivel_idNivel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inscripcion">
+            <EntityTypeMapping TypeName="Database2Model.Inscripcion">
+              <MappingFragment StoreEntitySet="Inscripcion">
+                <ScalarProperty Name="idInscripcion" ColumnName="idInscripcion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="alumno_legajo" ColumnName="alumno_legajo" />
+                <ScalarProperty Name="curso_identificador" ColumnName="curso_identificador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nivel">
+            <EntityTypeMapping TypeName="Database2Model.Nivel">
+              <MappingFragment StoreEntitySet="Nivel">
+                <ScalarProperty Name="idNivel" ColumnName="idNivel" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pago">
+            <EntityTypeMapping TypeName="Database2Model.Pago">
+              <MappingFragment StoreEntitySet="Pago">
+                <ScalarProperty Name="idPago" ColumnName="idPago" />
+                <ScalarProperty Name="supago" ColumnName="supago" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cuenta_idCuenta" ColumnName="cuenta_idCuenta" />
+                <ScalarProperty Name="alumno_legajo" ColumnName="alumno_legajo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tutor">
+            <EntityTypeMapping TypeName="Database2Model.Tutor">
+              <MappingFragment StoreEntitySet="Tutor">
+                <ScalarProperty Name="dniTutor" ColumnName="dniTutor" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

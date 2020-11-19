@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "IngresoLegajo";
+}
+
+    
+
+
+    <div class="container body-content">
+
+        <h2>Ingresar legajo</h2>
+        <form action="/Home/Cuenta" method="post">
+            <div class="form-group">
+
+                <input type="number" name="legajo" class="form-control" id="legajoAlumno" aria-describedby="legajoHelp">
+                <small id="legajoHelp" class="form-text text-muted">Solo ingrese numero sin puntos</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+        
+    </div>

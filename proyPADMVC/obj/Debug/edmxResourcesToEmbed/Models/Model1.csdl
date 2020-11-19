@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Alumno">
+    <Key>
+      <PropertyRef Name="legajo" />
+    </Key>
+    <Property Name="legajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dniAlumno" Type="Int32" />
+    <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+    <Property Name="tutor_dni" Type="Int32" />
+    <NavigationProperty Name="Tutor" Relationship="Self.FK__Alumno__tutor_dn__5629CD9C" FromRole="Alumno" ToRole="Tutor" />
+    <NavigationProperty Name="Concepto" Relationship="Self.FK__Concepto__alumno__5CD6CB2B" FromRole="Alumno" ToRole="Concepto" />
+    <NavigationProperty Name="Inscripcion" Relationship="Self.FK__Inscripci__alumn__59063A47" FromRole="Alumno" ToRole="Inscripcion" />
+    <NavigationProperty Name="Pago" Relationship="Self.FK__Pago__alumno_leg__60A75C0F" FromRole="Alumno" ToRole="Pago" />
+  </EntityType>
+  <EntityType Name="Concepto">
+    <Key>
+      <PropertyRef Name="idConcepto" />
+    </Key>
+    <Property Name="idConcepto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="concepto1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="monto" Type="Int32" />
+    <Property Name="alumno_legajo" Type="Int32" />
+    <NavigationProperty Name="Alumno" Relationship="Self.FK__Concepto__alumno__5CD6CB2B" FromRole="Concepto" ToRole="Alumno" />
+    <NavigationProperty Name="Pago" Relationship="Self.FK__Pago__concepto_i__5FB337D6" FromRole="Concepto" ToRole="Pago" />
+  </EntityType>
+  <EntityType Name="Curso">
+    <Key>
+      <PropertyRef Name="identificador" />
+    </Key>
+    <Property Name="identificador" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="anio" Type="Int32" />
+    <Property Name="division" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="nivel_idNivel" Type="Int32" />
+    <NavigationProperty Name="Nivel" Relationship="Self.FK__Curso__nivel_idN__534D60F1" FromRole="Curso" ToRole="Nivel" />
+    <NavigationProperty Name="Inscripcion" Relationship="Self.FK__Inscripci__curso__59FA5E80" FromRole="Curso" ToRole="Inscripcion" />
+  </EntityType>
+  <EntityType Name="Inscripcion">
+    <Key>
+      <PropertyRef Name="idInscripcion" />
+    </Key>
+    <Property Name="idInscripcion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <Property Name="anio" Type="Int32" />
+    <Property Name="alumno_legajo" Type="Int32" />
+    <Property Name="curso_identificador" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Alumno" Relationship="Self.FK__Inscripci__alumn__59063A47" FromRole="Inscripcion" ToRole="Alumno" />
+    <NavigationProperty Name="Curso" Relationship="Self.FK__Inscripci__curso__59FA5E80" FromRole="Inscripcion" ToRole="Curso" />
+  </EntityType>
+  <EntityType Name="Nivel">
+    <Key>
+      <PropertyRef Name="idNivel" />
+    </Key>
+    <Property Name="idNivel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Curso" Relationship="Self.FK__Curso__nivel_idN__534D60F1" FromRole="Nivel" ToRole="Curso" />
+  </EntityType>
+  <EntityType Name="Pago">
+    <Key>
+      <PropertyRef Name="idPago" />
+    </Key>
+    <Property Name="idPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="monto" Type="Int32" />
+    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <Property Name="concepto_idConcepto" Type="Int32" />
+    <Property Name="alumno_legajo" Type="Int32" />
+    <NavigationProperty Name="Alumno" Relationship="Self.FK__Pago__alumno_leg__60A75C0F" FromRole="Pago" ToRole="Alumno" />
+    <NavigationProperty Name="Concepto" Relationship="Self.FK__Pago__concepto_i__5FB337D6" FromRole="Pago" ToRole="Concepto" />
+  </EntityType>
+  <EntityType Name="Tutor">
+    <Key>
+      <PropertyRef Name="dniTutor" />
+    </Key>
+    <Property Name="dniTutor" Type="Int32" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Alumno" Relationship="Self.FK__Alumno__tutor_dn__5629CD9C" FromRole="Tutor" ToRole="Alumno" />
+  </EntityType>
+  <Association Name="FK__Alumno__tutor_dn__5629CD9C">
+    <End Role="Tutor" Type="Self.Tutor" Multiplicity="0..1" />
+    <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tutor">
+        <PropertyRef Name="dniTutor" />
+      </Principal>
+      <Dependent Role="Alumno">
+        <PropertyRef Name="tutor_dni" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Concepto__alumno__5CD6CB2B">
+    <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+    <End Role="Concepto" Type="Self.Concepto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumno">
+        <PropertyRef Name="legajo" />
+      </Principal>
+      <Dependent Role="Concepto">
+        <PropertyRef Name="alumno_legajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inscripci__alumn__59063A47">
+    <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+    <End Role="Inscripcion" Type="Self.Inscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumno">
+        <PropertyRef Name="legajo" />
+      </Principal>
+      <Dependent Role="Inscripcion">
+        <PropertyRef Name="alumno_legajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pago__alumno_leg__60A75C0F">
+    <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+    <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumno">
+        <PropertyRef Name="legajo" />
+      </Principal>
+      <Dependent Role="Pago">
+        <PropertyRef Name="alumno_legajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pago__concepto_i__5FB337D6">
+    <End Role="Concepto" Type="Self.Concepto" Multiplicity="0..1" />
+    <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Concepto">
+        <PropertyRef Name="idConcepto" />
+      </Principal>
+      <Dependent Role="Pago">
+        <PropertyRef Name="concepto_idConcepto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curso__nivel_idN__534D60F1">
+    <End Role="Nivel" Type="Self.Nivel" Multiplicity="0..1" />
+    <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nivel">
+        <PropertyRef Name="idNivel" />
+      </Principal>
+      <Dependent Role="Curso">
+        <PropertyRef Name="nivel_idNivel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inscripci__curso__59FA5E80">
+    <End Role="Curso" Type="Self.Curso" Multiplicity="0..1" />
+    <End Role="Inscripcion" Type="Self.Inscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="identificador" />
+      </Principal>
+      <Dependent Role="Inscripcion">
+        <PropertyRef Name="curso_identificador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Alumno" EntityType="Self.Alumno" />
+    <EntitySet Name="Concepto" EntityType="Self.Concepto" />
+    <EntitySet Name="Curso" EntityType="Self.Curso" />
+    <EntitySet Name="Inscripcion" EntityType="Self.Inscripcion" />
+    <EntitySet Name="Nivel" EntityType="Self.Nivel" />
+    <EntitySet Name="Pago" EntityType="Self.Pago" />
+    <EntitySet Name="Tutor" EntityType="Self.Tutor" />
+    <AssociationSet Name="FK__Alumno__tutor_dn__5629CD9C" Association="Self.FK__Alumno__tutor_dn__5629CD9C">
+      <End Role="Tutor" EntitySet="Tutor" />
+      <End Role="Alumno" EntitySet="Alumno" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Concepto__alumno__5CD6CB2B" Association="Self.FK__Concepto__alumno__5CD6CB2B">
+      <End Role="Alumno" EntitySet="Alumno" />
+      <End Role="Concepto" EntitySet="Concepto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inscripci__alumn__59063A47" Association="Self.FK__Inscripci__alumn__59063A47">
+      <End Role="Alumno" EntitySet="Alumno" />
+      <End Role="Inscripcion" EntitySet="Inscripcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pago__alumno_leg__60A75C0F" Association="Self.FK__Pago__alumno_leg__60A75C0F">
+      <End Role="Alumno" EntitySet="Alumno" />
+      <End Role="Pago" EntitySet="Pago" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pago__concepto_i__5FB337D6" Association="Self.FK__Pago__concepto_i__5FB337D6">
+      <End Role="Concepto" EntitySet="Concepto" />
+      <End Role="Pago" EntitySet="Pago" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curso__nivel_idN__534D60F1" Association="Self.FK__Curso__nivel_idN__534D60F1">
+      <End Role="Nivel" EntitySet="Nivel" />
+      <End Role="Curso" EntitySet="Curso" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inscripci__curso__59FA5E80" Association="Self.FK__Inscripci__curso__59FA5E80">
+      <End Role="Curso" EntitySet="Curso" />
+      <End Role="Inscripcion" EntitySet="Inscripcion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

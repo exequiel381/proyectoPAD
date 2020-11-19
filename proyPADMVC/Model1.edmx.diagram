@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff56b0b857124eeab16066c9cea2da90" Name="Diagram1">
+        <EntityTypeShape EntityType="Database2Model.Alumno" Width="1.5" PointX="6.375" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database2Model.concepto" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database2Model.cuenta" Width="1.5" PointX="6.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database2Model.Curso" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database2Model.Inscripcion" Width="1.5" PointX="9.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database2Model.Nivel" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database2Model.Pago" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database2Model.Tutor" Width="1.5" PointX="2.625" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="Database2Model.FK__Alumno__tutor_dn__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="Database2Model.FK__cuenta__alumno_l__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Database2Model.FK__Inscripci__alumn__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Database2Model.FK__Pago__alumno_leg__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="Database2Model.FK__cuenta__concepto__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="Database2Model.FK__Pago__cuenta_idC__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Database2Model.FK__Curso__nivel_idN__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="Database2Model.FK__Inscripci__curso__49C3F6B7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
