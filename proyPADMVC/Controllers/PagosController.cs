@@ -28,7 +28,7 @@ namespace proyPADMVC.Controllers
 
             c = db.cuenta.Find(id);
 
-            if(c.concepto.importe > 0) {
+            
 
                 if (c.concepto.concepto1.Equals("matricula"))
                 {
@@ -47,7 +47,7 @@ namespace proyPADMVC.Controllers
                     }
                 }
 
-            } else return Json(id);
+            
             
 
 
@@ -56,7 +56,6 @@ namespace proyPADMVC.Controllers
 
         public ActionResult ImpactarPago()
         {
-           
             return View();
             
         }

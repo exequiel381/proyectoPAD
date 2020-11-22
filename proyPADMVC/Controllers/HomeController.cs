@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
     public class HomeController : Controller
     {
         private Database2Entities db = new Database2Entities();
-        int? idCuenta, legajoAlumno;
+      
 
         public ActionResult Index()
         {
